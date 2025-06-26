@@ -14,14 +14,30 @@ Terraform으로 구성한 EKS 기반 마이크로서비스 인프라 자동화 �
 
 ```bash
 terraform/
-├── backend.tf               # S3 + DynamoDB 상태 관리
-├── provider.tf              # AWS provider 정의
-├── vpc/                     # VPC, Subnet, IGW, NAT
-├── eks/                     # EKS 클러스터 및 NodeGroup
-├── iam/                     # IAM Roles (IRSA 포함)
-├── alb-controller/          # ALB Ingress Controller Helm 배포
-├── argocd/                  # ArgoCD Helm 배포
-├── external-secrets/        # ESO Helm 배포
+├── backend.tf                   # S3 backend, DynamoDB 설정
+├── provider.tf                  # AWS Provider 설정
+├── variables.tf                 # 공통 변수 정의
+├── terraform.tfvars.example     # 변수 예시 파일
+├── vpc/
+│   └── vpc.tf                   # VPC/Subnet (data 또는 resource)
+├── eks/
+│   ├── eks.tf                   # EKS 클러스터 생성
+│   └── nodegroup.tf            # EKS NodeGroup 생성
+├── iam/
+│   ├── eks-cluster-role.tf     # EKS 클러스터용 IAM Role
+│   ├── eks-nodegroup-role.tf   # EKS NodeGroup IAM Role
+│   ├── alb-irsa-role.tf        # ALB Controller용 IRSA
+│   ├── argocd-irsa-role.tf     # ArgoCD용 IRSA
+│   └── external-secrets-irsa.tf # ESO용 IRSA
+├── alb-controller/
+│   ├── alb-controller.tf       # ALB Controller Helm 배포
+│   └── values.yaml             # Helm values
+├── argocd/
+│   ├── argocd.tf               # ArgoCD Helm 배포
+│   └── values.yaml
+├── external-secrets/
+│   ├── eso.tf                  # ESO Helm 배포
+│   └── values.yaml
 ```
 
 ## 📌 주요 설정
