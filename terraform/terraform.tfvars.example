@@ -1,0 +1,9 @@
+region              = "ap-northeast-2"
+backend_bucket      = "goormplay-terraform-backend"
+backend_lock_table  = "goormplay-terraform-lock"
+cluster_name        = "eks-main-cluster"
+vpc_id              = "vpc-0de40f141ee21d451"
+private_subnet_ids  = [
+  "subnet-0306e2be990c21612",
+  "subnet-0f5f8ff62a2547366"
+]
